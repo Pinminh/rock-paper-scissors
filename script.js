@@ -13,10 +13,12 @@ function getComputerChoice() {
 
 function getHumanChoice() {
   let humanChoice = prompt("Please enter your choice [rock/paper/scissors]:");
+  if (humanChoice === null) return null;
   humanChoice = humanChoice.replace(/ /g, '').toLowerCase();
 
   while (humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissors") {
     humanChoice = prompt("You can only enter 'rock' or 'paper' or 'scissors':");
+    if (humanChoice === null) return null;
     humanChoice = humanChoice.replace(/ /g, '').toLowerCase();
   }
 
@@ -52,10 +54,13 @@ const button = document.querySelector('button');
 
 function playGame() {
   for (let count = 1; count <= numberOfRounds; ++count) {
-    let result = playRound(getHumanChoice(), getComputerChoice());
+    let humanChoice = getHumanChoice();
+    if (humanChoice === null) return null;
+
+    let result = playRound(humanChoice, getComputerChoice());
     let msg = `Round ${count}: `;
     msg += (result.result === "tie") ? "Tie" : `You ${result.result}`;
-    
+
     if (result.result !== "tie")
       msg += ` - ${result.winner} dominates over ${result.loser}`;
     else
@@ -81,6 +86,9 @@ button.addEventListener("click", () => {
   const h3All = document.querySelectorAll("h3");
   h3All.forEach(h3 => h3.parentNode.removeChild(h3));
   button.disabled = true;
-  playGame();
+  if (playGame() === null) {
+    const _h3All = document.querySelectorAll("h3");
+    _h3All.forEach(h3 => h3.parentNode.removeChild(h3));
+  };
   button.disabled = false;
 });
