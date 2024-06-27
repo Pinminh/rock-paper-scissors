@@ -47,7 +47,8 @@ function playRound(humanChoice, computerChoice) {
   return { winner: computerChoice, loser: humanChoice, result: "lose" };
 }
 
-let numberOfRounds = 5;
+const numberOfRounds = 5;
+const button = document.querySelector('button');
 
 function playGame() {
   for (let count = 1; count <= numberOfRounds; ++count) {
@@ -60,7 +61,26 @@ function playGame() {
     else
       msg += ` - no domination occured`;
     console.log(msg);
+
+    let msgEle = document.createElement("h3");
+    msgEle.textContent = msg;
+    document.body.appendChild(msgEle);
+    document.body.offsetHeight;
   }
 
-  console.log(`You scored ${humanScore}. Opponent scored ${computerScore}!`);
+  let msg = `You scored ${humanScore}. Opponent scored ${computerScore}!`;
+  console.log(msg);
+  let msgEle = document.createElement("h3");
+  msgEle.className = "final";
+  msgEle.textContent = msg;
+  document.body.appendChild(msgEle);
+  document.body.offsetHeight;
 }
+
+button.addEventListener("click", () => {
+  const h3All = document.querySelectorAll("h3");
+  h3All.forEach(h3 => h3.parentNode.removeChild(h3));
+  button.disabled = true;
+  playGame();
+  button.disabled = false;
+});
