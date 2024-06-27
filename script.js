@@ -28,7 +28,7 @@ let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    return { winner: null, loser: null, state: "tie" };
+    return { winner: null, loser: null, result: "tie" };
   }
 
   let winner = null;
@@ -47,10 +47,20 @@ function playRound(humanChoice, computerChoice) {
   return { winner: computerChoice, loser: humanChoice, result: "lose" };
 }
 
-const numberOfRounds = 5;
+let numberOfRounds = 5;
 
 function playGame() {
-  for (let count = 0; count < numberOfRounds; ++count) {
+  for (let count = 1; count <= numberOfRounds; ++count) {
     let result = playRound(getHumanChoice(), getComputerChoice());
+    let msg = `Round ${count}: `;
+    msg += (result.result === "tie") ? "Tie" : `You ${result.result}`;
+    
+    if (result.result !== "tie")
+      msg += ` - ${result.winner} dominates over ${result.loser}`;
+    else
+      msg += ` - no domination occured`;
+    console.log(msg);
   }
+
+  console.log(`You scored ${humanScore}. Opponent scored ${computerScore}!`);
 }
