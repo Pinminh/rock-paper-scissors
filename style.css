@@ -1,27 +1,5 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-}
-
-button {
-  padding: 0.5em 1em;
-  background-color: lightblue;
-  text-align: center;
-  font-size: 2em;
-  flex: none;
-}
-
-.final {
-  font-size: 1.5em;
-  font-weight: bolder;
 }
